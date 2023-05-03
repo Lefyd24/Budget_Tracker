@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 class BudgetTracker:
     def __init__(self):
-        mongodb_connection_string = "mongodb+srv://fthenosyd:ksz7WfkeoRy6XLHu@budgetcluster.9oayoit.mongodb.net/test"
+        mongodb_connection_string = os.environ.get("MONGODB_CONNECTION_STRING")
         self.client = MongoClient(mongodb_connection_string)
         self.db  = self.client["BudgetCluster"]
         self.income = 1300
