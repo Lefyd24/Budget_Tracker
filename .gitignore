@@ -1,4 +1,4 @@
-venv
-.vercel
 .env
 env
+venv
+.vercel
