@@ -3,9 +3,9 @@ from flask import Flask, render_template, request, redirect
 from pymongo import MongoClient
 import datetime as dt
 import requests
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
-load_dotenv()
+#load_dotenv()
 
 app = Flask(__name__)
 
