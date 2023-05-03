@@ -1,0 +1,15 @@
+{
+    "income": "1300", 
+    "budget": {
+        "house": "340",
+        "gas": "100",
+        "supermarket": "150",
+        "entertainment": "150",
+        "efood": "40",
+        "bills": "60",
+        "others": "100",
+        "car_installment": "180",
+        "total": "1120"
+    },
+    "savings": "180"
+}
