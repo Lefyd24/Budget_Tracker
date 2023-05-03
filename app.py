@@ -3,7 +3,9 @@ from flask import Flask, render_template, request, redirect
 from pymongo import MongoClient
 import datetime as dt
 import requests
-import threading
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -150,13 +152,15 @@ class Notifier:
     def __init__(self):
         self.USER_KEY = os.environ.get("PUSHOVER_USER_KEY")
         self.API_TOKEN = os.environ.get("PUSHOVER_API_TOKEN")
-    
+        print(self.USER_KEY)
+        print(self.API_TOKEN)
+        
     def send_notification(self, message):
         # Key that can be included in the message are:
         # message, title, url, url_title, priority, sound, timestamp, html
         payload = {"token": self.API_TOKEN,
                     "user": self.USER_KEY}
-            
+        payload.update(message)
         response = requests.post('https://api.pushover.net/1/messages.json', data=payload)
         
         if response.status_code == 200:
@@ -167,6 +171,9 @@ class Notifier:
 Tracker = BudgetTracker()
 
 Notifier = Notifier()
+
+
+@app.route('/send-notification')
 def send_daily_notification():
     message = {
             'message': 'Εισαγωγή των σημερινών εξόδων',
@@ -174,6 +181,8 @@ def send_daily_notification():
             'url': 'https://budget-tracker-lefyd24.vercel.app/form',  # Replace with the URL of your app on Vercel
             'url_title': "Enter your today's expenses",
         }
+    Notifier.send_notification(message)
+    return "Notification sent.", 200
 
 @app.route('/')
 def index():
@@ -216,6 +225,4 @@ def submit():
 
 
 if __name__ == '__main__':
-    notification_thread = threading.Thread(target=send_daily_notification)
-    notification_thread.start()
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
