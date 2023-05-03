@@ -13,7 +13,9 @@
 
 Before any update:
 
-`<code>`pip freeze > requirements.txt `</code>`
+```pip
+
+```
 
 For updates on the app run:
 
