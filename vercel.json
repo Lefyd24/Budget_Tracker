@@ -16,7 +16,9 @@
       }
     ],
     "env": {
-      "MONGODB_CONNECTION_STRING": "@mongodb_connection_string"
+      "MONGODB_CONNECTION_STRING": "@mongodb_connection_string",
+      "PUSHOVER_USER_KEY": "@pushover_user_key",
+      "PUSHOVER_API_TOKEN": "@pushover_api_token"
     }
   }
   
