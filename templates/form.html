@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Expenses Form</title>
+    <style>
+        body {
+            font-family: Calibri, Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: grid;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style='color:green;'>Daily Expenses ({{date.strftime('%d-%m-%Y')}})</h1>
+        <form action="/submit" method="POST">
+            <label for="rent">Rent:</label>
+            <input type="number" id="rent" name="rent" step="0.01" min="0" value="0" required>
+            <label for="bills">Bills:</label>
+            <input type="number" id="bills" name="bills" step="0.01" min="0" value="0" required>
+            <label for="car_installements">Car Installements</label>
+            <input type="number" id="car_installements" name="car_installements" min="0" value="0"
+             step="0.01" required>
+            <label for="gasoline">Gasoline:</label>
+            <input type="number" id="gasoline" name="gasoline" step="0.01" min="0" value="0" required>
+            <label for="supermarket">Supermarket:</label>
+            <input type="number" id="supermarket" name="supermarket" step="0.01" min="0" value="0" required>
+            <label for="efood">E-food:</label>
+            <input type="number" id="efood" name="efood" step="0.01" min="0" value="0" required>
+            <label for="entertainment">Clothes:</label>
+            <input type="number" id="entertainment" name="entertainment" step="0.01" min="0" value="0" required>
+            <label for="other">Other:</label>
+            <input type="number" id="other" name="other" step="0.01" min="0" value="0" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

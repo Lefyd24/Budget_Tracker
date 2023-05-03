@@ -3,14 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Expenses Form</title>
+    <title>Budget</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 50%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        thead {
+            font-weight: bold;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        button {
+            display: block;
+            width: 200px;
+            height: 40px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h1>Daily Expenses Form</h1>
-    <form action="/submit" method="POST">
-        <label for="expense">Enter your daily expense:</label>
-        <input type="number" id="expense" name="expense" step="0.01" required>
-        <button type="submit">Submit</button>
-    </form>
+    <h1>Current Budget</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Budget</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category, leftover in budget.items() %}
+                {% if category not in ['month', 'year', '_id'] %}
+                {% if category == 'income' or category == 'saving' %}
+                <tr style='background-color:green;color:white;'>
+                    <td>{{ category.upper() }}</td>
+                    <td>{{ leftover }}</td>
+                    {% if leftover >= balance[category] and category == 'saving' %}
+                    <td style='background-color:red;color:white;'>{{ balance[category] }}</td>
+                    {% else %}
+                    <td >{{ balance[category] }}</td>
+                    {% endif %}
+                </tr>
+                {% else %}
+                {% if leftover <= balance[category] %}
+                    <tr style='background-color:red;color:white;'>
+                        <td>{{ category.upper() }}</td>
+                        <td>{{ leftover }}</td>
+                        <td>{{ balance[category] }}</td>
+                    </tr>
+                {% else %}
+                <tr>
+                    <td>{{ category.upper() }}</td>
+                    <td>{{ leftover }}</td>
+                    <td>{{ balance[category] }}</td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <button onclick="window.location.href='/form'">Enter Daily Expenses</button>
 </body>
 </html>
