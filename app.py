@@ -125,7 +125,7 @@ class BudgetTracker:
                     total_expenses += expenses[category]
                 except TypeError: # in case the category is ObjectID
                     continue
-        month_balance["saving"] = month_balance["income"] - total_expenses
+        month_balance["saving"] -=  total_expenses
         self.db.balance.update_one({"month": month, "year": year}, {"$set": month_balance})
     
     def show_budget(self):
